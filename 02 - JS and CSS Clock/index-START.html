@@ -67,42 +67,59 @@
     </style>
 
     <script>
-      
-      // let hour = 0;
-      function setDate(){
-        // hour++;
-        // console.log('hour', hour);
-        document.querySelector('.hour-hand')
-      }
-      function setHour(){
-        // hour++;
-        // console.log('hour', hour);
-        document.querySelector('.hour-hand')
-      }
+      const secondHand = document.querySelector('.second-hand');
+      const minuteHand = document.querySelector('.min-hand');
+      const hourHand = document.querySelector('.hour-hand');
+      const hand = document.querySelector('.hand');
+      function setDate() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        let secondsDegrees = (seconds / 60) * 360 + 90;
+        if (secondsDegrees >= 450) {
+          hand.style.transition = 'none';
+          hand.style.transform = 'rotate(90deg)';
+          // secondHand.style.transform = `rotate(90deg)`;
+          // hand.style.setProperty('transition', 'all 0.5s');
+          // console.log('secondHand.style', hand.style);
+        } else secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        // if(secondsDegrees === 90)secondHand.style.addProperty('transition');
+        // if(secondsDegrees === 360)secondHand.style.removeProperty('transition')
 
-      // let min = 0;
-      function setMinute(){
-        // min++;
-        // console.log('min', min);
-        document.querySelector('.min-hand')
-      }
+        const minutes = now.getMinutes();
+        const minutesDegrees = (minutes / 60) * 360 + 90;
+        minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 
-      // let sec = 0;
-      let position = 90
-      function setSecond(){
-        // sec++;
-        // console.log('sec', sec);
-        const second  = document.querySelector('.second-hand')
-        // let currentstyle = getComputedStyle(second, null) 
-        // console.log('transform', currentstyle);
-        position++;
-        console.log('second', second.style);
-        second.style['transform'] = `rotate(${position}deg)`;
+        const hours = now.getHours();
+        const hoursDegrees = (hours / 12) * 360 + 90;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
       }
+      // // let hour = 0;
+      // function setHour() {
+      //   // hour++;
+      //   // console.log('hour', hour);
+      //   document.querySelector('.hour-hand');
+      // }
 
-      setInterval(setHour, 3600000);
-      setInterval(setMinute, 60000);
-      setInterval(setSecond, 1000);
+      // // let min = 0;
+      // function setMinute() {
+      //   // min++;
+      //   // console.log('min', min);
+      //   document.querySelector('.min-hand');
+      // }
+
+      // // let sec = 0;
+      // let position = 90;
+      // function setSecond() {
+      //   // sec++;
+      //   // console.log('sec', sec);
+
+      //   // let currentstyle = getComputedStyle(second, null)
+      //   // console.log('transform', currentstyle);
+      //   position++;
+      //   console.log('second', second.style);
+      // }
+
+      setInterval(setDate, 1000);
     </script>
   </body>
 </html>

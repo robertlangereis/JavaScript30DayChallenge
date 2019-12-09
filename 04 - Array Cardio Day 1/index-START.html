@@ -79,9 +79,44 @@
       // 8. Reduce Exercise
       // Sum up the instances of each of these
       const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-      data.reduce((acc, item)=>{
-        item
-      })
+      const OK = data.reduce((acc, item)=>{
+        switch (item) {
+          case 'car':
+          acc.car += 1
+          break;
+          case 'truck':
+          acc.truck += 1
+          break;
+          case 'bike':
+          acc.bike += 1
+          break;
+          case 'walk':
+          acc.walk += 1
+          break;
+          case 'van':
+          acc.van += 1
+          break;
+          default:
+          return
+            break;
+        }
+        // console.log(acc)
+        return acc
+      },{car: 0, truck: 0, bike: 0, walk: 0, van: 0})
+      console.log(OK)
+
+
+      // Above my solution, but too much hard coded, so...... Answer is:
+
+      const data2 = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+      const transport = data.reduce((acc, item)=>{
+        if(!acc[item]){
+          acc[item] = 0  
+        }
+        acc[item]++;
+        return acc
+      },{})
+      console.log(transport)
     </script>
   </body>
 </html>

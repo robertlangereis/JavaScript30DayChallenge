@@ -1,46 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Console Tricks!</title>
+	</head>
+	<body>
+		<p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+		<script>
+			const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+			function makeGreen() {
+				const p = document.querySelector('p');
+				p.style.color = '#BADA55';
+				p.style.fontSize = '50px';
+			}
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+			// Regular
+			console.log('joe');
+			const variable = 0;
+			// Interpolated
+			console.log(`Hallo I'm a ${variable}`);
 
-    // Regular
+			// Styled
+			console.log(`%c Hallo there`, 'font-size:50px');
 
-    // Interpolated
+			// warning!
+			console.warn('oh noooooo');
 
-    // Styled
+			// Error :|
+			console.error('oh noooooo');
 
-    // warning!
+			// Info
+			console.info('Random trivia');
 
-    // Error :|
+			// Testing - sort of if else is wrong - test code
+			console.assert(1 === 2, 'that is wrong');
 
-    // Info
+			// clearing
+			console.clear();
+			const p = document.querySelector('p');
+			// Viewing DOM Elements
+			console.log(p);
+			console.dir(p);
+			console.clear();
 
-    // Testing
+			// Grouping together
 
-    // clearing
+			// counting
+			console.count('wes');
+			console.count('wes');
+			console.count('wes');
+			console.count('steve');
+			console.count('steve');
+			console.count('steve');
+			console.count('wes');
+			console.count('wes');
+			console.count('steve');
+			console.count('steve');
+			console.count('steve');
+			console.count('wes');
+			console.count('wes');
 
-    // Viewing DOM Elements
-
-    // Grouping together
-
-    // counting
-
-    // timing
-
-  </script>
-</body>
+			// timing
+			console.time('fetching data');
+			fetch('https://api.github.com/users/wesbos')
+				.then(data => data.json())
+				.then(data => {
+					console.timeEnd('fetching data');
+					console.log(data);
+        });
+        
+        console.table(dogs)
+        
+		</script>
+	</body>
 </html>

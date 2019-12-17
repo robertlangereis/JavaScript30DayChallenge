@@ -95,55 +95,31 @@
 		</div>
 
 		<script>
-			const input = document.querySelectorAll('input');
+			const checkboxes = document.querySelectorAll(
+				'.inbox input[type="checkbox"]'
+			);
+      let lastChecked;
 
-			handleCheck = e => {
-        var child = e.currentTarget;
-				var grandParent = child.parentNode.parentNode;
-				var parent = child.parentNode;
-        var index = Array.prototype.indexOf.call(grandParent.children, parent);
-        
-        let lastSelected;
+			function handleCheck(e) {
+				let inBetween = false;
 
-        if (e.shiftDown && this.checked) {
-					//do what we please
+				if (e.shiftKey && this.checked) {
+					checkboxes.forEach(checkbox => {
+						if (checkbox === this || checkbox === lastChecked) {
+							inBetween = !inBetween;
+							!checkbox.checked && (inBetween = false);
+						}
+						if (inBetween) {
+							checkbox.checked = true;
+						}
+					});
 				}
+				lastChecked = this;
+			}
 
-        lastSelected = this;
-
-				
-				firstSelected === undefined
-					? (firstSelected = index)
-					: (lastSelected = index);
-				
-			};
-			
-			input.forEach(inputItem => {
-				array.push(inputItem);
-				inputItem.addEventListener('click', handleCheck);
+			checkboxes.forEach(checkbox => {
+				checkbox.addEventListener('click', handleCheck);
 			});
-
-			var shiftDown = false;
-			var setShiftDown = function(event) {
-				if (event.keyCode === 16 || event.charCode === 16) {
-					window.shiftDown = true;
-					// console.log('yes');
-				}
-			};
-
-			var setShiftUp = function(event) {
-				if (event.keyCode === 16 || event.charCode === 16) {
-					window.shiftDown = false;
-					// console.log('nope');
-				}
-			};
-
-			window.addEventListener
-				? document.addEventListener('keydown', setShiftDown)
-				: document.attachEvent('keydown', setShiftDown);
-			window.addEventListener
-				? document.addEventListener('keyup', setShiftUp)
-				: document.attachEvent('keyup', setShiftUp);
 		</script>
 	</body>
 </html>
